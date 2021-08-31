@@ -1,8 +1,6 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { FlashcardsApp } from './apps/FlashcardsApp/FlashcardsApp';
 
-function App() {
-  return <FlashcardsApp />
-};
+const App: FunctionComponent = () => <FlashcardsApp />;
 
 export default App;
