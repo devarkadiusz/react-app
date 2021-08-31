@@ -1,4 +1,5 @@
 import React, { FunctionComponent, useState } from "react";
+import { Button } from "./Components/Button/Button";
 import { Flashcard } from "./Components/Flashcard/Flashcard";
 
 import './FlashcardsApp.sass';
@@ -7,14 +8,14 @@ export const FlashcardsApp: FunctionComponent = () => {
     interface FlashcardProps {
         front: String;
         back: String;
-    }
-    
+    };
+
     interface ListProps extends Array<any> {
         [index: number]: FlashcardProps;
-    }
+    };
 
     const [list, setList] = useState<ListProps>([]);
-    const [inputText] = useState<FlashcardProps>({front: "", back: ""});
+    const [inputText] = useState<FlashcardProps>({ front: "", back: "" });
 
     return (
         <main>
@@ -27,11 +28,14 @@ export const FlashcardsApp: FunctionComponent = () => {
             </div>
             <div className="FlashcardsList">
                 {
-                    list.map((_, index) => {
-                        return <Flashcard key={index} front={_.front} back={_.back}></Flashcard>
-                    })
+                    list.length > 0 ? list.map((_, index) => {
+                        return <Flashcard key={index} index={index} front={_.front} back={_.back} del={<Button value="delete" onClick={() => {
+                            list.splice(index, 1)
+                            setList([...list])
+                        }} />} edit={list} setList={setList}/>
+                    }) : <span>Nothing is here!</span>
                 }
             </div>
         </main>
     );
-}
+};
