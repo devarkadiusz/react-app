@@ -99,14 +99,18 @@ section.Design
                     align-items: center
                     background-color: rgba(red, .1)
                     border-radius: 30px
-                    > span
+                    &> span
                         width: auto
                         margin: 0
                         padding: 0
                         display: flex
                         align-items: center
                         cursor: pointer
+                        transition: .3s all
+                        animation: .2s muffin
                         opacity: .7
+                        &:active
+                            transform: scale(.8)
                 /* Chrome, Safari, Edge, Opera */
                 input::-webkit-outer-spin-button,
                 input::-webkit-inner-spin-button
@@ -157,6 +161,7 @@ section.Design
         padding: 250px 0 0 0
         display: flex
         position: sticky
+        box-sizing: border-box
         align-items: center
         justify-content: center
         span
@@ -218,3 +223,18 @@ section.Design
         100%
             transform: scale(1)
             opacity: .5
+
+@media only screen and (max-width: 800px)
+    section.Design > .content
+        margin: 0 20px
+        flex-wrap: wrap
+        .preview
+            top: 0px
+            height: 600px
+            padding: 0
+            display: flex
+            position: relative
+            align-items: center
+            justify-content: center
+            img
+                max-width: 70%

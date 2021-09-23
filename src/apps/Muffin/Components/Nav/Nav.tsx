@@ -50,7 +50,9 @@ interface NavProps {
 
 export const Nav: FunctionComponent<NavProps> = (props) => {
     const [scroll, setScroll] = useState(window.scrollY || 0);
-    window.addEventListener("scroll", () => setScroll(window.scrollY))
+    const [webWidth, setWebWidth] = useState(window.innerWidth);
+    const [hamburger, setHamburger] = useState(false);
+    const [shoppingCartMobile, setShoppingCartMobile] = useState(false);
 
     const [basket, setBasket] = useState(false);
 
@@ -60,6 +62,13 @@ export const Nav: FunctionComponent<NavProps> = (props) => {
     const [quantity, setQuantity] = props.qua;
 
     const [cookies, setCookie, removeCookie] = useCookies(["shoppingCart"]);
+
+    window.addEventListener("scroll", () => setScroll(window.scrollY))
+    window.addEventListener("resize", () => {
+        setWebWidth(window.innerWidth);
+        setHamburger(false);
+        setShoppingCartMobile(false);
+    });
 
     const RemoveShoppingItem = (index: number) => {
         cookies["shoppingCart"].splice(index, 1);
@@ -105,25 +114,33 @@ export const Nav: FunctionComponent<NavProps> = (props) => {
     return (
         <nav className={scroll > 0 ? "Nav active" : "Nav"}>
             <div className="width">
+            {webWidth <= 800 ? <span className={hamburger ? "hamburger active" : "hamburger"} onClick={() => {setHamburger(!hamburger); setShoppingCartMobile(false)}}>
+                <span></span>
+                <span></span>
+                <span></span>
+            </span> : null}
                 <div className="left_menu">
                     <div className="logo">
                         <img src={Logo} />
                     </div>
-                    <ul>
+                    <ul className={hamburger && webWidth <= 800 ? "active" : ""}>
                         {NavItems.map((_, index) => {
                             return <li key={index}>{_.title}</li>
                         })}
-                        <span></span>
+                        <span className="hover"></span>
                     </ul>
                 </div>
-                <div className="right_menu" onMouseLeave={() => setBasket(false)}>
-                    <span className="shoppingCart" onMouseEnter={() => setBasket(true)}>
+                <div className="right_menu" onClick={() => {
+                    setShoppingCartMobile(!shoppingCartMobile);
+                    setHamburger(false);
+                    }} onMouseLeave={() => webWidth < 800 ? null : setBasket(false)}>
+                    <span className="shoppingCart" onMouseEnter={() => webWidth < 800 ? null : setBasket(true)}>
                         <img src={ShoppingCartIcon} />
                         <span>{cookies["shoppingCart"]?.length}</span>
                     </span>
-                    <div className="shoppingCartList">
-                        {cookies["shoppingCart"]?.length > 0 && basket ? <GetShoppingList /> : null }
-                    </div>
+                    {basket || shoppingCartMobile ? <div className="shoppingCartList">
+                        {cookies["shoppingCart"].length > 0 ? <GetShoppingList /> : null }
+                    </div> : null}
                     <span className="language">
                         <img src={PL} />
                     </span>

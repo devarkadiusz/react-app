@@ -150,13 +150,13 @@ export const Design: FunctionComponent<DesignProps> = (props) => {
                                 {quantity > 1 ?
                                     <span onClick={() => { quantity < 2 ? setQuantity(1) : setQuantity(quantity - 1) }}>
                                         <img src={MinusIcon} />
-                                    </span> : <span></span>
+                                    </span> : <div style={{width:"50px"}}></div>
                                 }
                                 <input min="1" max="20" type="number" value={quantity} onInput={SetQ} />
                                 {quantity < 20 ?
                                     <span onClick={() => { quantity >= 20 ? setQuantity(20) : setQuantity(quantity + 1) }}>
                                         <img src={PlusIcon} />
-                                    </span> : <span><img /></span>
+                                    </span> : <div style={{width:"50px"}}></div>
                                 }
                             </div>
                         </div>
