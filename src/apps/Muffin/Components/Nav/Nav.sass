@@ -219,3 +219,12 @@ nav.Nav
             height: 100%
             position: fixed
             transform: translateX(0)
+            ul
+                max-height: calc(100vh - 100px)
+                height: calc(100vh - 100px)
+                border-radius: 0
+                li:last-child
+                    bottom: 0
+                    position: sticky
+                    border-radius: 13px 13px 0 0
+                    background-color: #fff7f7

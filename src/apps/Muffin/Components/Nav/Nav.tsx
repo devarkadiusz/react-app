@@ -114,7 +114,10 @@ export const Nav: FunctionComponent<NavProps> = (props) => {
     return (
         <nav className={scroll > 0 ? "Nav active" : "Nav"}>
             <div className="width">
-            {webWidth <= 800 ? <span className={hamburger ? "hamburger active" : "hamburger"} onClick={() => {setHamburger(!hamburger); setShoppingCartMobile(false)}}>
+            {webWidth <= 800 ? <span className={hamburger ? "hamburger active" : "hamburger"} onClick={() => {
+                setHamburger(!hamburger); 
+                setShoppingCartMobile(false);
+            }}>
                 <span></span>
                 <span></span>
                 <span></span>
@@ -131,15 +134,17 @@ export const Nav: FunctionComponent<NavProps> = (props) => {
                     </ul>
                 </div>
                 <div className="right_menu" onClick={() => {
-                    setShoppingCartMobile(!shoppingCartMobile);
-                    setHamburger(false);
+                    if(webWidth <= 800) {
+                        setHamburger(false);
+                        setBasket(false);
+                    }
                     }} onMouseLeave={() => webWidth < 800 ? null : setBasket(false)}>
-                    <span className="shoppingCart" onMouseEnter={() => webWidth < 800 ? null : setBasket(true)}>
+                    <span className="shoppingCart" onClick={() => setShoppingCartMobile(!shoppingCartMobile)} onMouseEnter={() => webWidth < 800 ? null : setBasket(true)}>
                         <img src={ShoppingCartIcon} />
-                        <span>{cookies["shoppingCart"]?.length}</span>
+                        {cookies["shoppingCart"]?.length > 0 ? <span>{cookies["shoppingCart"]?.length}</span> : null}
                     </span>
-                    {basket || shoppingCartMobile ? <div className="shoppingCartList">
-                        {cookies["shoppingCart"].length > 0 ? <GetShoppingList /> : null }
+                    {basket || shoppingCartMobile && cookies["shoppingCart"].length > 0 ? <div className="shoppingCartList">
+                        {cookies["shoppingCart"]?.length > 0 ? <GetShoppingList /> : null }
                     </div> : null}
                     <span className="language">
                         <img src={PL} />
