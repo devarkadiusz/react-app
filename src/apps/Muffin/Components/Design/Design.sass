@@ -32,9 +32,21 @@ section.Design
                 &:hover
                     transform: scale(1.1)
             &.Size ul li
+                width: 100px
+                height: 100px
                 padding: 20px
+                display: flex
                 position: relative
+                align-items: center
+                justify-content: center
                 cursor: pointer
+                img
+                    position: absolute
+                .previewMuffin
+                    display: flex
+                    position: relative
+                    align-items: center
+                    justify-content: center
             &.Size ul li:nth-child(1) img
                 max-width: 50px
             &.Size ul li:nth-child(2) img
@@ -69,6 +81,7 @@ section.Design
                 display: flex
                 span
                     width: 100%
+                    min-width: 50px
                     display: flex
                     align-items: center
                     flex-wrap: nowrap
@@ -138,7 +151,7 @@ section.Design
                     border-radius: 13px
 
     .preview
-        top: 100px
+        top: 160px
         bottom: 0
         width: 100%
         padding: 250px 0 0 0
@@ -172,6 +185,9 @@ section.Design
         position: sticky
         text-align: center
         background-color: red
+        transition: .3s all
+        &:active
+            transform: scale(0.9)
 
     .checked
         top: 0

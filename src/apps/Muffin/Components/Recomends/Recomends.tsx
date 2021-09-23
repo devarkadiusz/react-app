@@ -9,7 +9,7 @@ export const Recomends: FunctionComponent = props => {
         <section className="Recomends">
             <nav>
                 <div className="width">
-                    <span className="title">Recomends</span>
+                    <span className="title">Recommendations</span>
                 </div>
             </nav>
             <div className="content">

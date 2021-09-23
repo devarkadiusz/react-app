@@ -1,10 +1,14 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useState } from "react";
+import { useCookies, Cookies } from "react-cookie";
 
 import "./Nav.sass";
 import Logo from "../../Assets/Img/muffin.png";
 import PL from "../../Assets/Img/PL.png";
 import GB from "../../Assets/Img/GB.png";
 import ShoppingCartIcon from "../../Assets/Img/icons/icons8-shopping-cart-100.png";
+import DeleteIcon from "../../Assets/Img/icons/icons8-delete-480.png";
+import { SizeItems, FillingItems, ToppingItems } from "../../MuffinItems";
+
 
 const NavItems = [
     {
@@ -21,9 +25,85 @@ const NavItems = [
     }
 ]
 
-export const Nav: FunctionComponent = (props) => {
+interface PreviewProps {
+    filling: number;
+    topping: number;
+    onClick: any;
+};
+
+const Preview: FunctionComponent<PreviewProps> = props => {
+    const fill = FillingItems[props.filling];
+    const top = ToppingItems[props.topping];
+
+    return (<span className="previewMuffin" onClick={props.onClick}>
+        <img src={top?.iconSrc} />
+        <img src={fill?.iconSrc} />
+    </span>);
+};
+
+interface NavProps {
+    size: [number, React.Dispatch<React.SetStateAction<number>>],
+    fill: [number, React.Dispatch<React.SetStateAction<number>>],
+    top: [number, React.Dispatch<React.SetStateAction<number>>],
+    qua: [number, React.Dispatch<React.SetStateAction<number>>]
+}
+
+export const Nav: FunctionComponent<NavProps> = (props) => {
+    const [scroll, setScroll] = useState(window.scrollY || 0);
+    window.addEventListener("scroll", () => setScroll(window.scrollY))
+
+    const [basket, setBasket] = useState(false);
+
+    const [size, setSize] = props.size;
+    const [fillings, setFillings] = props.fill;
+    const [toppings, setToppings] = props.top;
+    const [quantity, setQuantity] = props.qua;
+
+    const [cookies, setCookie, removeCookie] = useCookies(["shoppingCart"]);
+
+    const RemoveShoppingItem = (index: number) => {
+        cookies["shoppingCart"].splice(index, 1);
+        setCookie("shoppingCart", cookies["shoppingCart"]);
+    }
+
+    const GetShoppingList: FunctionComponent = () => {
+        let result = [];
+        let FullPrice = 0;
+        let FullQuantity = 0;
+        if (cookies["shoppingCart"]) {
+            let data = cookies.shoppingCart;
+            for (let index = 0; index < data.length; index++) {
+                const item = data[index];
+                const price = (SizeItems[item.size].price + FillingItems[item.fill].price + ToppingItems[item.top].price) * item.quantity
+                FullPrice += price
+                FullQuantity += item.quantity
+                result.push({
+                    "prev": <Preview filling={item.fill} topping={item.top} onClick={() => {
+                        setSize(item.size);
+                        setFillings(item.fill);
+                        setToppings(item.top);
+                        setQuantity(item.quantity);
+                    }}/>,
+                    "quantity": item.quantity,
+                    "price": price,
+                    "remove": <span className="remove" onClick={() => RemoveShoppingItem(index)}><img src={DeleteIcon} /></span>
+                });
+            }
+            result.push({
+                "price": FullPrice
+            });
+        }
+        return <ul>{result.map((item, index) => {
+            return <li key={index}>
+                {item.prev ? item.prev : <span>Price</span>}
+                {item.quantity ? <span>x{item.quantity}</span> : <span>x{FullQuantity}</span>}
+                <span>{item.price} € {item.remove}</span>
+            </li>
+        })}</ul>
+    }
+
     return (
-        <nav className="Nav">
+        <nav className={scroll > 0 ? "Nav active" : "Nav"}>
             <div className="width">
                 <div className="left_menu">
                     <div className="logo">
@@ -36,11 +116,14 @@ export const Nav: FunctionComponent = (props) => {
                         <span></span>
                     </ul>
                 </div>
-                <div className="right_menu">
-                    <span className="shoppingCart">
+                <div className="right_menu" onMouseLeave={() => setBasket(false)}>
+                    <span className="shoppingCart" onMouseEnter={() => setBasket(true)}>
                         <img src={ShoppingCartIcon} />
-                        <span>5</span>
+                        <span>{cookies["shoppingCart"]?.length}</span>
                     </span>
+                    <div className="shoppingCartList">
+                        {cookies["shoppingCart"]?.length > 0 && basket ? <GetShoppingList /> : null }
+                    </div>
                     <span className="language">
                         <img src={PL} />
                     </span>

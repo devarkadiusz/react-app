@@ -1,8 +1,14 @@
 nav.Nav
+    top: 0
     width: 100%
     height: 100px
     display: flex
+    position: sticky
     background-color: rgb(255, 255, 255)
+    transition: .3s all
+    z-index: 99
+    &.active
+        box-shadow: 0 0 12px 0 #0000000f
     .width
         max-width: 1350px
         width: 100%
@@ -62,7 +68,7 @@ nav.Nav
                 margin: 0 0 0 374px
                 width: 108px
 
-        span
+        > span
             width: 100%
             height: 40px
             margin: 0
@@ -75,15 +81,60 @@ nav.Nav
         display: flex
         align-items: center
     .shoppingCart
-        width: 30px
-        height: 30px
+        height: 100px
         display: flex
+        position: relative
         align-items: center
         justify-content: center
         span
             margin: 0 15px
         img
             max-width: 30px
+    .shoppingCartList
+        top: 100px
+        width: 300px
+        margin: 0
+        padding: 0
+        position: absolute
+        ul
+            max-height: 600px
+            margin: 0
+            padding: 0
+            display: flex
+            overflow-y: auto
+            flex-wrap: wrap
+            border-radius: 0 0 16px 16px
+            justify-content: center
+            background-color: white
+            transition: .4s all
+            box-shadow: 0 11px 12px 0 #0000000f
+            li
+                width: 100%
+                padding: 20px 30px
+                display: flex
+                align-items: center
+                justify-content: space-between
+                
+                &:last-child
+                    margin: 0
+                    background-color: #ff000012
+                span
+                    display: flex
+                    margin: 0 0 0 20px
+                    position: relative
+                    align-items: center
+                img
+                    max-width: 50px
+                    position: absolute
+                .previewMuffin
+                    display: flex
+                    align-items: center
+                    justify-content: center
+                .remove img
+                        max-width: 16px
+        &:hover ~ ul
+            display: none
+
     .language
         width: 40px
         height: 20px
