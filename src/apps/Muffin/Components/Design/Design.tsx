@@ -58,7 +58,7 @@ export const Design: FunctionComponent<DesignProps> = (props) => {
     const AddToShoppingCart = () => {
         const c = cookies["shoppingCart"]
 
-        if (quantity > 0 && quantity < 21) {
+        if (quantity > 0 && quantity < 21 && cookies["shoppingCart"].length < 8) {
 
             if (!cookies["shoppingCart"])
                 setCookie("shoppingCart", [{
@@ -162,9 +162,9 @@ export const Design: FunctionComponent<DesignProps> = (props) => {
                         </div>
                     </div>
                     <div className="Price active">
-                        <div className="title" onClick={AddToShoppingCart}>
+                        <div className={cookies["shoppingCart"].length < 8 ? "title" : "title disable"} onClick={AddToShoppingCart}>
                             <Price />
-                            <span>Order</span>
+                            {cookies["shoppingCart"].length < 8 ? <span>Order</span> : <span>You can not order more!</span>}
                         </div>
                     </div>
                 </div>

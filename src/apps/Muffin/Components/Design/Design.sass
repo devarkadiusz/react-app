@@ -132,18 +132,27 @@ section.Design
                 display: flex
                 flex-wrap: wrap
                 background-color: rgba(red, .7)
+                transition: .4s all
                 cursor: pointer
+                &.disable
+                    background-color: rgb(222, 222, 222)
+                    span:first-child
+                        font-size: 15px
+                    span:last-child
+                        font-size: 25px
                 span
                     width: 100%
                     text-align: center
                     transition: .4s all
                     &:last-child
                         font-size: 15px
-                &:hover 
+                &:not(.disable):hover 
                     span:first-child
                         font-size: 15px
                     span:last-child
                         font-size: 25px
+                &:not(.disable):active
+                    transform: scale(0.9)
                         
 
             &.Size, &.Fillings, &.Toppings, &.Quantity, &.Price
@@ -183,16 +192,6 @@ section.Design
             transform: scale(1.4)
         .previwe_content
             display: block
-
-    .order
-        width: 100%
-        bottom: 0
-        position: sticky
-        text-align: center
-        background-color: red
-        transition: .3s all
-        &:active
-            transform: scale(0.9)
 
     .checked
         top: 0
