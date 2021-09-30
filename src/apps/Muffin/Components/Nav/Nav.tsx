@@ -45,7 +45,7 @@ export const Nav: FunctionComponent<NavProps> = (props) => {
     const [toppings, setToppings] = props.top;
     const [quantity, setQuantity] = props.qua;
 
-    const [lang, setLang] = useState("GB");
+    const [lang, setLang] = useState("DE");
 
     const [cookies, setCookie, removeCookie] = useCookies(["shoppingCart"]);
 
@@ -57,6 +57,10 @@ export const Nav: FunctionComponent<NavProps> = (props) => {
     });
 
     const t = props.t
+
+    const LangItems = [
+        "PL", "GB", "DE"
+    ]
 
     const NavItems = [
         {
@@ -91,8 +95,10 @@ export const Nav: FunctionComponent<NavProps> = (props) => {
             let data = cookies.shoppingCart;
             for (let index = 0; index < data.length; index++) {
                 const item = data[index];
-                const price = (SizeItems[item.size].price + FillingItems[item.fill].price + ToppingItems[item.top].price) * item.quantity * (t("lang") == "PL" ? 5 : 1)
-                FullPrice += price
+                // const price = ((SizeItems[item.size].price + FillingItems[item.fill].price + ToppingItems[item.top].price)) * item.quantity * (t("lang") == "DE" ? .8 : t("lang") == "GB" ? 1 : 4.5)
+                const price = SizeItems[item.size].price + FillingItems[item.fill].price + ToppingItems[item.top].price
+                const priceD = (price * item.quantity) * (t("lang") == "DE" ? 1 : t("lang") == "GB" ? .9 : 4.5)
+                FullPrice += priceD
                 FullQuantity += item.quantity
                 result.push({
                     "prev": <Preview filling={item.fill} topping={item.top} onClick={() => {
@@ -102,19 +108,19 @@ export const Nav: FunctionComponent<NavProps> = (props) => {
                         setQuantity(item.quantity);
                     }}/>,
                     "quantity": item.quantity,
-                    "price": price,
+                    "price": priceD.toFixed(2),
                     "remove": <span className="remove" onClick={() => RemoveShoppingItem(index)}><img src={DeleteIcon} /></span>
                 });
             }
             result.push({
-                "price": FullPrice
+                "price": FullPrice.toFixed(2)
             });
         }
         return <ul>{result.map((item, index) => {
             return <li key={index}>
                 {item.prev ? item.prev : <span>{t("price")}</span>}
                 {item.quantity ? <span>x{item.quantity}</span> : <span>x{FullQuantity}</span>}
-                <span>{item.price} {t("currency")} {item.remove}</span>
+                <span>{item.price} {t("currency")} {item.remove ? item.remove : <span className="remove"></span>}</span>
             </li>
         })}</ul>
     }
@@ -144,25 +150,33 @@ export const Nav: FunctionComponent<NavProps> = (props) => {
                         <span className="hover"></span>
                     </ul>
                 </div>
-                <div className="right_menu" onClick={() => {
+                <div className="right_menu" onMouseLeave={() => webWidth < 1300 ? null : setBasket(false)} onClick={() => {
                     if(webWidth <= 1300) {
                         setHamburger(false);
                         setBasket(false);
                     }
-                    }} onMouseLeave={() => webWidth < 1300 ? null : setBasket(false)}>
+                    }}>
                     <span className="shoppingCart" onClick={() => webWidth < 1300 && cookies["shoppingCart"]?.length > 0 ? setShoppingCartMobile(!shoppingCartMobile) : null} onMouseEnter={() => webWidth < 1300 ? null : setBasket(true)}>
                         <img src={ShoppingCartIcon} />
                         <span>{cookies["shoppingCart"]?.length}</span>
                     </span>
-                    {basket || shoppingCartMobile && cookies["shoppingCart"]?.length > 0 ? <div className="shoppingCartList">
+                    {basket || shoppingCartMobile && cookies["shoppingCart"]?.length > 0 ? <div className="shoppingCartList" onMouseLeave={() => webWidth < 1300 ? null : setBasket(false)}>
                         {cookies["shoppingCart"]?.length > 0 ? <GetShoppingList /> : null }
                     </div> : null}
                     <span className="language">
+                        <img src={process.env.PUBLIC_URL + `./lang/${lang}.png`} />
+                        <ul className="other">
+                            {LangItems.map((item, index) => {
+                                return lang != item ? <li key={index} onClick={() => {setLang(item); props.lang(item)}}><img src={process.env.PUBLIC_URL + `./lang/${item}.png`} /></li> : null
+                            })}
+                        </ul>
+                    </span>
+                    {/* <span className="language">
                         <img src={process.env.PUBLIC_URL + `./lang/${lang}.png`} onClick={
                             () => {
                                 lang == "PL" ? props.lang("GB") : props.lang("PL")
                                 lang == "PL" ? setLang("GB") : setLang("PL")}} />
-                    </span>
+                    </span> */}
                 </div>
             </div>
         </nav>

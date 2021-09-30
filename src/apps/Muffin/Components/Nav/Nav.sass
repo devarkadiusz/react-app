@@ -169,14 +169,43 @@ nav.Nav
             display: none
 
     .language
-        width: 40px
-        height: 20px
+        max-width: 90px
         margin: 0 20px
         padding: 0
         display: block
+        position: relative
         cursor: pointer
-        img
-            max-width: 40px
+        > img
+            max-width: 60px
+            padding: 15px
+        &:hover ul
+            display: flex
+            opacity: 1
+        ul
+            padding: 10px 0 0 0
+            width: 90px
+            position: absolute
+            display: none
+            flex-wrap: wrap
+            align-items: center
+            border-radius: 12px
+            justify-content: center
+            list-style-type: none
+            background-color: white
+            box-shadow: 0 11px 12px 0 #0000000f
+            transition: .4s all
+            opacity: 0
+            li
+                margin: 0
+                padding: 15px 10px
+                display: flex
+                box-sizing: border-box
+                align-items: center
+                justify-content: center
+                img
+                    max-width: 60px
+                &:first-child
+                    padding: 15px 15px 10px 15px
     &.active
         box-shadow: 0 0 12px 0 #0000000f
         .logo .previewMuffin

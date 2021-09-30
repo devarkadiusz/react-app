@@ -95,7 +95,8 @@ export const Design: FunctionComponent<DesignProps> = (props) => {
 
     const Price: FunctionComponent = () => {
         const price = SizeItems[size].price + FillingItems[fillings].price + ToppingItems[toppings].price
-        return <span>{t("price")}: {(price * quantity) * (t("lang") == "PL" ? 5 : 1)} {t("currency")}</span>
+        const priceD = ((price * quantity) * (t("lang") == "DE" ? 1 : t("lang") == "GB" ? .9 : 4.5)).toFixed(2)
+        return <span>{t("price")}: {priceD} {t("currency")}</span>
     }
 
     return (

@@ -1,6 +1,41 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
+const langDE = {
+    lang: "DE",
+
+    // nav
+    withDelivery: "Mit Lieferung",
+    inRestaurant: "Im Restaurant",
+    contact: "Kontakt",
+    coupons: "Gutscheine",
+    currency: "€",
+
+    // header
+    delivery: "Lieferung",
+    orderAndPickup: "Bestellung und Abholung",
+    beingYourOrder: "Ihre Bestellung sein",
+    findRestaurant: "Restaurant finden",
+
+    // recommendations
+    recommendations: "Empfehlungen",
+
+    // design
+    designAMuffin: "Muffins entwerfen",
+    chocolate: "Schokolade",
+    honey: "Honig",
+    raspberry: "Himbeere",
+    none: "Keiner",
+
+    size: "Größe",
+    toppings: "Beläge",
+    fillings: "Füllungen",
+    quantity: "Menge",
+    price: "Preis",
+    order: "Befehl",
+    youCanNotOrderMore: "Sie können nicht mehr bestellen!",
+};
+
 const langGB = {
     lang: "GB",
 
@@ -77,9 +112,10 @@ i18n
     .init({
         resources: {
             GB: { translation: langGB },
-            PL: { translation: langPL }
+            PL: { translation: langPL },
+            DE: { translation: langDE }
         },
-        lng: "GB",
+        lng: "DE",
         fallbackLng: "PL",
         interpolation: { escapeValue: false }
     });
