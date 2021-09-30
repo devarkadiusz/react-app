@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 
 import "./Design.sass";
 // import MuffinIcon from "../../Assets/Img/muffin.png";
@@ -30,7 +30,9 @@ interface DesignProps {
     size: [number, React.Dispatch<React.SetStateAction<number>>],
     fill: [number, React.Dispatch<React.SetStateAction<number>>],
     top: [number, React.Dispatch<React.SetStateAction<number>>],
-    qua: [number, React.Dispatch<React.SetStateAction<number>>]
+    qua: [number, React.Dispatch<React.SetStateAction<number>>],
+
+    t: any;
 }
 
 export const Design: FunctionComponent<DesignProps> = (props) => {
@@ -38,8 +40,19 @@ export const Design: FunctionComponent<DesignProps> = (props) => {
     const [fillings, setFillings] = props.fill;
     const [toppings, setToppings] = props.top;
     const [quantity, setQuantity] = props.qua;
+    const t = props.t;
 
+    const [disableOrder, setDisableOrder] = useState(false);
     const [cookies, setCookie, removeCookie] = useCookies(["shoppingCart"]);
+
+    useEffect(() => {
+        if (cookies["shoppingCart"]) {
+            if (cookies["shoppingCart"].length >= 8)
+                setDisableOrder(true);
+            else
+                setDisableOrder(false);
+        }
+    })
 
     const SetQ = (e: any) => {
         if (e.target.value.length == 0) {
@@ -56,34 +69,38 @@ export const Design: FunctionComponent<DesignProps> = (props) => {
     }
 
     const AddToShoppingCart = () => {
-        const c = cookies["shoppingCart"]
+        const c = cookies["shoppingCart"];
 
-        if (quantity > 0 && quantity < 21 && cookies["shoppingCart"].length < 8) {
+        if (quantity > 0 && quantity < 21) {
 
-            if (!cookies["shoppingCart"])
+            if (!c)
                 setCookie("shoppingCart", [{
                     "size": size,
                     "fill": fillings,
                     "top": toppings,
                     "quantity": quantity
                 }]);
-            else setCookie("shoppingCart", [...c, {
-                "size": size,
-                "fill": fillings,
-                "top": toppings,
-                "quantity": quantity
-            }]);
+            else {
+                if (c.length < 8)
+                    setCookie("shoppingCart", [...c, {
+                        "size": size,
+                        "fill": fillings,
+                        "top": toppings,
+                        "quantity": quantity
+                    }]);
+                else setDisableOrder(true);
+            }
         }
     }
 
     const Price: FunctionComponent = () => {
         const price = SizeItems[size].price + FillingItems[fillings].price + ToppingItems[toppings].price
-        return <span>Price: {price * quantity} €</span>
+        return <span>{t("price")}: {(price * quantity) * (t("lang") == "PL" ? 5 : 1)} {t("currency")}</span>
     }
 
     return (
         <section className="Design">
-            <Recomends>
+            <Recomends t={t}>
                 {RecomendItems.map((_, index) => {
                     return <li key={index} onClick={() => {
                         setSize(_.size);
@@ -97,14 +114,14 @@ export const Design: FunctionComponent<DesignProps> = (props) => {
             </Recomends>
             <header>
                 <div className="width">
-                    <span className="title">Design a Muffin</span>
+                    <span className="title">{t("designAMuffin")}</span>
                 </div>
             </header>
             <div className="content">
                 <div className="select">
                     <div className="Size">
                         <div className="title">
-                            <span>Size</span>
+                            <span>{t("size")}</span>
                         </div>
                         <ul>
                             {SizeItems.map((item, index) => {
@@ -117,13 +134,13 @@ export const Design: FunctionComponent<DesignProps> = (props) => {
                     </div>
                     <div className="Fillings">
                         <div className="title">
-                            <span>Fillings</span>
+                            <span>{t("fillings")}</span>
                         </div>
                         <ul>
                             {FillingItems.map((item, index) => {
                                 return <li key={index} onClick={() => setFillings(index)}>
                                     <img src={item.iconSrc} />
-                                    <span>{item.name}</span>
+                                    <span>{t(item.name)}</span>
                                     {fillings == index ? <img className="checked" src={CheckedIcon} /> : null}
                                 </li>
                             })}
@@ -131,13 +148,13 @@ export const Design: FunctionComponent<DesignProps> = (props) => {
                     </div>
                     <div className="Toppings">
                         <div className="title">
-                            <span>Toppings</span>
+                            <span>{t("toppings")}</span>
                         </div>
                         <ul>
                             {ToppingItems.map((item, index) => {
                                 return <li key={index} onClick={() => setToppings(index)}>
                                     <img src={item.iconSrc} />
-                                    <span>{item.name}</span>
+                                    <span>{t(item.name)}</span>
                                     {toppings == index ? <img className="checked" src={CheckedIcon} /> : null}
                                 </li>
                             })}
@@ -145,28 +162,36 @@ export const Design: FunctionComponent<DesignProps> = (props) => {
                     </div>
                     <div className="Quantity active">
                         <div className="title">
-                            <span>Quantity</span>
+                            <span>{t("quantity")}</span>
                             <div className="content">
                                 {quantity > 1 ?
                                     <span onClick={() => { quantity < 2 ? setQuantity(1) : setQuantity(quantity - 1) }}>
                                         <img src={MinusIcon} />
-                                    </span> : <div style={{width:"50px"}}></div>
+                                    </span> : <div style={{ width: "50px" }}></div>
                                 }
                                 <input min="1" max="20" type="number" value={quantity} onInput={SetQ} />
                                 {quantity < 20 ?
                                     <span onClick={() => { quantity >= 20 ? setQuantity(20) : setQuantity(quantity + 1) }}>
                                         <img src={PlusIcon} />
-                                    </span> : <div style={{width:"50px"}}></div>
+                                    </span> : <div style={{ width: "50px" }}></div>
                                 }
                             </div>
                         </div>
                     </div>
                     <div className="Price active">
-                        <div className={cookies["shoppingCart"].length < 8 ? "title" : "title disable"} onClick={AddToShoppingCart}>
+                        <div className={!disableOrder ? "title" : "title disable"} onClick={AddToShoppingCart}>
                             <Price />
-                            {cookies["shoppingCart"].length < 8 ? <span>Order</span> : <span>You can not order more!</span>}
+                            {!disableOrder ? <span>{t("order")}</span> : <span>{t("youCanNotOrderMore")}</span>}
                         </div>
                     </div>
+
+                    {/* <div className="Price active">
+                        <div className={"title"} onClick={AddToShoppingCart}>
+                            <Price />
+                            {<span>{t("order")}</span>}
+                        </div>
+                    </div> */}
+
                 </div>
                 <div className={"preview size_" + size}>
                     <Preview filling={fillings} topping={toppings} />

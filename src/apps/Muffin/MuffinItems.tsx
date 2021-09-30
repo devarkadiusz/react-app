@@ -13,34 +13,34 @@ import MuffinTopHoney from "./Assets/Img/Muffin/muffin-top-honey.png";
 export const SizeItems = [
     {
         "size": 0,
-        "price": 3,
+        "price": 1,
         "iconSrc": MuffinIcon
     },
     {
         "size": 1,
-        "price": 5,
+        "price": 2,
         "iconSrc": MuffinIcon
     },
     {
         "size": 2,
-        "price": 7,
+        "price": 3,
         "iconSrc": MuffinIcon
     }
 ];
 export const FillingItems = [
     {
         "name": "chocolate",
-        "price": 5,
+        "price": 2,
         "iconSrc": MuffinBaseChocolate
     },
     {
         "name": "honey",
-        "price": 4,
+        "price": 3,
         "iconSrc": MuffinBaseHoney
     },
     {
         "name": "raspberry",
-        "price": 6,
+        "price": 4,
         "iconSrc": MuffinBaseRaspberry
     },
     {
@@ -52,17 +52,17 @@ export const FillingItems = [
 export const ToppingItems = [
     {
         "name": "chocolate",
-        "price": 5,
+        "price": 2,
         "iconSrc": MuffinTopChocolate
     },
     {
         "name": "honey",
-        "price": 4,
+        "price": 3,
         "iconSrc": MuffinTopHoney
     },
     {
         "name": "raspberry",
-        "price": 6,
+        "price": 4,
         "iconSrc": MuffinTopRaspberry
     },
     {
