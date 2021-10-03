@@ -1,6 +1,47 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
+const langFR = {
+    lang: "FR",
+
+    // nav
+    withDelivery: "Avec livraison",
+    inRestaurant: "Au restaurant",
+    contact: "Contact",
+    coupons: "Bons de réduction",
+    currency: "€",
+
+    // header
+    delivery: "Livraison",
+    orderAndPickup: "Commande et ramassage",
+    beingYourOrder: "étant votre commande",
+    findRestaurant: "Trouver Restaurant",
+
+    // recommendations
+    recommendations: "Recommandations",
+
+    // design
+    designAMuffin: "Concevoir un muffin",
+    chocolate: "Chocolat",
+    honey: "Mon chéri",
+    raspberry: "Framboise",
+    none: "Rien",
+
+    size: "Taille",
+    toppings: "Garnitures",
+    fillings: "Garnitures",
+    quantity: "Quantité",
+    price: "Le prix",
+    order: "ordre",
+    youCanNotOrderMore: "Vous ne pouvez pas commanderPlus!",
+
+    // subscribe
+    title: "Abonnez-vous à notre newsletter",
+    subPlaceholder: "Entrez une adresse e-mail valide",
+    submit: "Nous faire parvenir",
+
+};
+
 const langDE = {
     lang: "DE",
 
@@ -34,6 +75,11 @@ const langDE = {
     price: "Preis",
     order: "Befehl",
     youCanNotOrderMore: "Sie können nicht mehr bestellen!",
+
+    // subscribe
+    title: "Abonniere unseren Newsletter",
+    subPlaceholder: "Geben sie eine gültige E-Mail-Adresse an",
+    submit: "einreichen",
 };
 
 const langGB = {
@@ -69,6 +115,11 @@ const langGB = {
     price: "Price",
     order: "Order",
     youCanNotOrderMore: "You can not order more!",
+
+    // subscribe
+    title: "Subscribe to our Newsletter",
+    subPlaceholder: "Enter a valid email address",
+    submit: "Submit"
 };
 
 const langPL = {
@@ -105,6 +156,11 @@ const langPL = {
     price: "Cena",
     order: "Zamów",
     youCanNotOrderMore: "Nie możesz zamówić większej ilości!",
+
+    // subscribe
+    title: "Zasubskrybuj nasze babeczki!",
+    subPlaceholder: "Podaj swój adres email",
+    submit: "Zatwierdź",
 };
 
 i18n
@@ -113,9 +169,10 @@ i18n
         resources: {
             GB: { translation: langGB },
             PL: { translation: langPL },
-            DE: { translation: langDE }
+            DE: { translation: langDE },
+            FR: { translation: langFR }
         },
-        lng: "DE",
+        lng: "FR",
         fallbackLng: "PL",
         interpolation: { escapeValue: false }
     });

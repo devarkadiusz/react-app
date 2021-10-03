@@ -9,6 +9,7 @@ import { Header } from "./Components/Header/Header";
 import { Nav } from "./Components/Nav/Nav";
 
 import "./Muffin.sass";
+import { Newsletter } from "./Components/Newsletter/Newsletter";
 
 export const Muffin: FunctionComponent = () => {
     const size = useState(Math.floor(Math.random() * 3));
@@ -28,6 +29,7 @@ export const Muffin: FunctionComponent = () => {
             <Nav size={size} fill={fill} top={top} qua={qua} lang={lang} t={t} />
             <Header t={t} />
             <Design size={size} fill={fill} top={top} qua={qua} t={t}/>
+            <Newsletter t={t} />
             <Footer />
         </main>
     );

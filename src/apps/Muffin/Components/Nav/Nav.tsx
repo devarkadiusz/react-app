@@ -45,7 +45,7 @@ export const Nav: FunctionComponent<NavProps> = (props) => {
     const [toppings, setToppings] = props.top;
     const [quantity, setQuantity] = props.qua;
 
-    const [lang, setLang] = useState("DE");
+    const [lang, setLang] = useState("FR");
 
     const [cookies, setCookie, removeCookie] = useCookies(["shoppingCart"]);
 
@@ -59,7 +59,7 @@ export const Nav: FunctionComponent<NavProps> = (props) => {
     const t = props.t
 
     const LangItems = [
-        "PL", "GB", "DE"
+        "PL", "GB", "DE", "FR"
     ]
 
     const NavItems = [
