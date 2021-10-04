@@ -30,7 +30,7 @@ export const Muffin: FunctionComponent = () => {
 
     const { t } = useTranslation();
 
-    const [l, setL] = useState("");
+    const [l, setL] = useState("GB");
 
     const lang = (lang: string) => {
         i18n.changeLanguage(lang);

@@ -17,6 +17,7 @@ export const Header: FunctionComponent<HeaderProps> = props => {
 
     return (
         <header className="Header" style={{backgroundPositionY: `-${scroll / 1.5}px`, background: "url(" + Confetti +") center center fixed"}}>
+            <span className="background" style={{backgroundColor: `rgba(255, 255, 255, ${scroll / 350})`}}></span>
             <div>
                 <div className="orderbox">
                     <nav className={orderSwicth ? "right" : "left"}>

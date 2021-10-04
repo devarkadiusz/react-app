@@ -172,7 +172,7 @@ i18n
             DE: { translation: langDE },
             FR: { translation: langFR }
         },
-        lng: "FR",
+        lng: "GB",
         fallbackLng: "PL",
         interpolation: { escapeValue: false }
     });

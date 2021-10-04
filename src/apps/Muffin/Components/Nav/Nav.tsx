@@ -163,10 +163,13 @@ export const Nav: FunctionComponent<NavProps> = (props) => {
                         {cookies["shoppingCart"]?.length > 0 ? <GetShoppingList /> : null }
                     </div> : null}
                     <span className="language">
-                        <img src={process.env.PUBLIC_URL + `./lang/${lang[1]}.png`} />
+                        <img src={process.env.PUBLIC_URL + `./lang/${lang[1] || "GB"}.png`} />
                         <ul className="other">
                             {LangItems.map((item, index) => {
-                                return lang[1] != item ? <li key={index} onClick={() => props.lang[0](item)}><img src={process.env.PUBLIC_URL + `./lang/${item}.png`} /></li> : null
+                                if(lang[1])
+                                    return lang[1] != item ? <li key={index} onClick={() => props.lang[0](item)}><img src={process.env.PUBLIC_URL + `./lang/${item}.png`} /></li> : null
+                                else
+                                    return "GB" != item ? <li key={index} onClick={() => props.lang[0](item)}><img src={process.env.PUBLIC_URL + `./lang/${item}.png`} /></li> : null
                             })}
                         </ul>
                     </span>

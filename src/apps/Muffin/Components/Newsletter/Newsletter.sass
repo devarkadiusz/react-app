@@ -58,3 +58,17 @@ section.Newsletter
                     background-color: rgba(red, .3)
                 &:active
                     transform: scale(.95)
+
+@media only screen and (max-width: 1300px)
+    section.Newsletter .width
+        div
+            width: 100%
+            text-align: right
+        input
+            &[type="email"]
+                width: 100%
+            &[type="button"]
+                margin: 0
+@media only screen and (max-width: 600px)
+    section.Newsletter .width input[type="button"]
+        width: 100%
