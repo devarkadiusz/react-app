@@ -31,3 +31,16 @@ footer.Footer
                 background-color: rgba(red, .1)
             &:visited
                 color: white
+@media only screen and (max-width: 600px)
+    footer.Footer
+        .width
+            height: auto
+            display: block
+            box-sizing: border-box
+        .content
+            flex-wrap: wrap
+            text-align: center
+            justify-content: center
+            span
+                width: 100%
+                display: block

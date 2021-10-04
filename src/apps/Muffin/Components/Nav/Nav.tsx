@@ -140,7 +140,7 @@ export const Nav: FunctionComponent<NavProps> = (props) => {
                         <Preview filling={fillings} topping={toppings} onClick={() => {
                             window.scrollTo({top: 0, behavior: 'smooth'})
                         }}/>
-                        <span className="name">Muffin</span>
+                        <span className="name">{webWidth <= 1300 ? null : "Muffin"}</span>
                     </div>
                     <ul className={hamburger && webWidth <= 1300 ? "active" : ""}>
                         {NavItems.map((_, index) => {
