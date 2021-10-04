@@ -28,16 +28,16 @@ interface NavProps {
     top: [number, React.Dispatch<React.SetStateAction<number>>];
     qua: [number, React.Dispatch<React.SetStateAction<number>>];
 
+    scroll: number;
     lang: any;
     t: any;
 }
 
 export const Nav: FunctionComponent<NavProps> = (props) => {
-    const [scroll, setScroll] = useState(window.scrollY || 0);
     const [webWidth, setWebWidth] = useState(window.innerWidth);
+
     const [hamburger, setHamburger] = useState(false);
     const [shoppingCartMobile, setShoppingCartMobile] = useState(false);
-
     const [basket, setBasket] = useState(false);
 
     const [size, setSize] = props.size;
@@ -45,18 +45,17 @@ export const Nav: FunctionComponent<NavProps> = (props) => {
     const [toppings, setToppings] = props.top;
     const [quantity, setQuantity] = props.qua;
 
-    const [lang, setLang] = useState("FR");
-
     const [cookies, setCookie, removeCookie] = useCookies(["shoppingCart"]);
 
-    window.addEventListener("scroll", () => setScroll(window.scrollY))
+    const lang = props.lang;
+    const scroll = props.scroll;
+    const t = props.t
+
     window.addEventListener("resize", () => {
         setWebWidth(window.innerWidth);
         setHamburger(false);
         setShoppingCartMobile(false);
     });
-
-    const t = props.t
 
     const LangItems = [
         "PL", "GB", "DE", "FR"
@@ -126,7 +125,7 @@ export const Nav: FunctionComponent<NavProps> = (props) => {
     }
 
     return (
-        <nav className={scroll > 300 ? "Nav active" : "Nav"}>
+        <nav className={scroll < 400 ? "Nav" : "Nav active"} style={{backgroundColor: basket || hamburger || shoppingCartMobile ? "white" :`rgba(255, 255, 255, ${(scroll / 350)})`}}>
             <div className="width">
             {webWidth <= 1300 ? <span className={hamburger ? "hamburger active" : "hamburger"} onClick={() => {
                 setHamburger(!hamburger); 
@@ -164,19 +163,13 @@ export const Nav: FunctionComponent<NavProps> = (props) => {
                         {cookies["shoppingCart"]?.length > 0 ? <GetShoppingList /> : null }
                     </div> : null}
                     <span className="language">
-                        <img src={process.env.PUBLIC_URL + `./lang/${lang}.png`} />
+                        <img src={process.env.PUBLIC_URL + `./lang/${lang[1]}.png`} />
                         <ul className="other">
                             {LangItems.map((item, index) => {
-                                return lang != item ? <li key={index} onClick={() => {setLang(item); props.lang(item)}}><img src={process.env.PUBLIC_URL + `./lang/${item}.png`} /></li> : null
+                                return lang[1] != item ? <li key={index} onClick={() => props.lang[0](item)}><img src={process.env.PUBLIC_URL + `./lang/${item}.png`} /></li> : null
                             })}
                         </ul>
                     </span>
-                    {/* <span className="language">
-                        <img src={process.env.PUBLIC_URL + `./lang/${lang}.png`} onClick={
-                            () => {
-                                lang == "PL" ? props.lang("GB") : props.lang("PL")
-                                lang == "PL" ? setLang("GB") : setLang("PL")}} />
-                    </span> */}
                 </div>
             </div>
         </nav>

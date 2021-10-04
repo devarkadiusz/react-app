@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useState } from "react";
 
 import Confetti_1 from "../../Assets/Img/confetti.png";
 import Confetti_2 from "../../Assets/Img/confetti.png";

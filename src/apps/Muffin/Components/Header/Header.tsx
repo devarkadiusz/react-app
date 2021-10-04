@@ -1,9 +1,10 @@
 import React, { FunctionComponent, useState } from "react";
 
 import "./Header.sass";
-import Confetti from "../../Assets/Img/confetti.png";
+import Confetti from "../../Assets/Img/confetti2.png";
 
 interface HeaderProps {
+    scroll: number;
     t: any;
 }
 
@@ -12,9 +13,10 @@ export const Header: FunctionComponent<HeaderProps> = props => {
     const [orderLocalisation, setOrderLocalisation] = useState("");
 
     const t = props.t;
+    const scroll = props.scroll;
 
     return (
-        <header className="Header">
+        <header className="Header" style={{backgroundPositionY: `-${scroll / 1.5}px`, background: "url(" + Confetti +") center center fixed"}}>
             <div>
                 <div className="orderbox">
                     <nav className={orderSwicth ? "right" : "left"}>

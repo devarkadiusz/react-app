@@ -10,24 +10,38 @@ import { Nav } from "./Components/Nav/Nav";
 
 import "./Muffin.sass";
 import { Newsletter } from "./Components/Newsletter/Newsletter";
+import { useCookies } from "react-cookie";
 
 export const Muffin: FunctionComponent = () => {
     const size = useState(Math.floor(Math.random() * 3));
     const fill = useState(Math.floor(Math.random() * 4));
     const top = useState(Math.floor(Math.random() * 4));
     const qua = useState(3); 
+    const [scroll, setScroll] = useState(window.scrollY || 0);
+
+    const [cookies, setCookie, removeCookie] = useCookies(["lang"]);
+
+    window.addEventListener("scroll", () => setScroll(window.scrollY));
+    window.onload = () => {
+        const lang = cookies["lang"];
+        i18n.changeLanguage(lang);
+        setL(lang);
+    }
 
     const { t } = useTranslation();
 
-    const lang = (lng: string) => {
-        i18n.changeLanguage(lng);
-        return lng;
+    const [l, setL] = useState("");
+
+    const lang = (lang: string) => {
+        i18n.changeLanguage(lang);
+        setCookie("lang", lang);
+        setL(lang);
     }
 
     return (
         <main>
-            <Nav size={size} fill={fill} top={top} qua={qua} lang={lang} t={t} />
-            <Header t={t} />
+            <Nav scroll={scroll} size={size} fill={fill} top={top} qua={qua} lang={[lang, l]} t={t} />
+            <Header scroll={scroll} t={t} />
             <Design size={size} fill={fill} top={top} qua={qua} t={t}/>
             <Newsletter t={t} />
             <Footer />
