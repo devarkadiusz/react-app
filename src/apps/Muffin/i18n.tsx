@@ -158,7 +158,7 @@ const langPL = {
     youCanNotOrderMore: "Nie możesz zamówić większej ilości!",
 
     // subscribe
-    title: "Zasubskrybuj nasze babeczki!",
+    title: "Nie zapomnij o żadnej babce! Bądź na bieżąco!",
     subPlaceholder: "Podaj swój adres email",
     submit: "Zatwierdź",
 };
