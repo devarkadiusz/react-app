@@ -9,7 +9,7 @@ export const Footer: FunctionComponent = () => {
                 <div className="content">
                     <span>Copyright © 2021 Muffin</span>
                     <span className="heart">&#9829;</span>
-                    <a target="_blank" href="https://github.com/devarkadiusz" >DevArkadiusz<img src={process.env.PUBLIC_URL + "/GitHub-Mark/GitHub-Mark-Light-120px-plus.png"} /></a>
+                    <a target="_blank" href="https://github.com/devarkadiusz" >DevArkadiusz<img alt="" src={process.env.PUBLIC_URL + "/GitHub-Mark/GitHub-Mark-Light-120px-plus.png"} /></a>
                 </div>
             </div>
         </footer>

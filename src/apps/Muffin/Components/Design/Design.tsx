@@ -21,8 +21,8 @@ const Preview: FunctionComponent<PreviewProps> = props => {
     const fill = FillingItems[props.filling];
     const top = ToppingItems[props.topping];
     return (<span className="previewMuffin">
-        <img src={top?.iconSrc} />
-        <img src={fill?.iconSrc} />
+        <img alt="" src={top?.iconSrc} />
+        <img alt="" src={fill?.iconSrc} />
     </span>);
 };
 
@@ -128,7 +128,7 @@ export const Design: FunctionComponent<DesignProps> = (props) => {
                             {SizeItems.map((item, index) => {
                                 return <li key={index} onClick={() => setSize(index)}>
                                     <Preview filling={fillings} topping={toppings} />
-                                    {size == index ? <img className="checked" src={CheckedIcon} /> : null}
+                                    {size == index ? <img alt="" className="checked" src={CheckedIcon} /> : null}
                                 </li>
                             })}
                         </ul>
@@ -140,9 +140,9 @@ export const Design: FunctionComponent<DesignProps> = (props) => {
                         <ul>
                             {FillingItems.map((item, index) => {
                                 return <li key={index} onClick={() => setFillings(index)}>
-                                    <img src={item.iconSrc} />
+                                    <img alt="" src={item.iconSrc} />
                                     <span>{t(item.name)}</span>
-                                    {fillings == index ? <img className="checked" src={CheckedIcon} /> : null}
+                                    {fillings == index ? <img alt="" className="checked" src={CheckedIcon} /> : null}
                                 </li>
                             })}
                         </ul>
@@ -154,9 +154,9 @@ export const Design: FunctionComponent<DesignProps> = (props) => {
                         <ul>
                             {ToppingItems.map((item, index) => {
                                 return <li key={index} onClick={() => setToppings(index)}>
-                                    <img src={item.iconSrc} />
+                                    <img alt="" src={item.iconSrc} />
                                     <span>{t(item.name)}</span>
-                                    {toppings == index ? <img className="checked" src={CheckedIcon} /> : null}
+                                    {toppings == index ? <img alt="" className="checked" src={CheckedIcon} /> : null}
                                 </li>
                             })}
                         </ul>
@@ -167,13 +167,13 @@ export const Design: FunctionComponent<DesignProps> = (props) => {
                             <div className="content">
                                 {quantity > 1 ?
                                     <span onClick={() => { quantity < 2 ? setQuantity(1) : setQuantity(quantity - 1) }}>
-                                        <img src={MinusIcon} />
+                                        <img alt="" src={MinusIcon} />
                                     </span> : <div style={{ width: "50px" }}></div>
                                 }
                                 <input min="1" max="20" type="number" value={quantity} onInput={SetQ} />
                                 {quantity < 20 ?
                                     <span onClick={() => { quantity >= 20 ? setQuantity(20) : setQuantity(quantity + 1) }}>
-                                        <img src={PlusIcon} />
+                                        <img alt="" src={PlusIcon} />
                                     </span> : <div style={{ width: "50px" }}></div>
                                 }
                             </div>

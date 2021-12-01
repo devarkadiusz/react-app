@@ -17,8 +17,8 @@ const Preview: FunctionComponent<PreviewProps> = props => {
     const top = ToppingItems[props.topping];
 
     return (<span className="previewMuffin" onClick={props.onClick}>
-        <img src={top?.iconSrc} />
-        <img src={fill?.iconSrc} />
+        <img alt="" src={top?.iconSrc} />
+        <img alt="" src={fill?.iconSrc} />
     </span>);
 };
 
@@ -108,7 +108,7 @@ export const Nav: FunctionComponent<NavProps> = (props) => {
                     }}/>,
                     "quantity": item.quantity,
                     "price": priceD.toFixed(2),
-                    "remove": <span className="remove" onClick={() => RemoveShoppingItem(index)}><img src={DeleteIcon} /></span>
+                    "remove": <span className="remove" onClick={() => RemoveShoppingItem(index)}><img alt="" src={DeleteIcon} /></span>
                 });
             }
             result.push({
@@ -156,20 +156,20 @@ export const Nav: FunctionComponent<NavProps> = (props) => {
                     }
                     }}>
                     <span className="shoppingCart" onClick={() => webWidth < 1300 && cookies["shoppingCart"]?.length > 0 ? setShoppingCartMobile(!shoppingCartMobile) : null} onMouseEnter={() => webWidth < 1300 ? null : setBasket(true)}>
-                        <img src={ShoppingCartIcon} />
+                        <img alt="" src={ShoppingCartIcon} />
                         <span>{cookies["shoppingCart"]?.length}</span>
                     </span>
                     {basket || shoppingCartMobile && cookies["shoppingCart"]?.length > 0 ? <div className="shoppingCartList" onMouseLeave={() => webWidth < 1300 ? null : setBasket(false)}>
                         {cookies["shoppingCart"]?.length > 0 ? <GetShoppingList /> : null }
                     </div> : null}
                     <span className="language">
-                        <img src={process.env.PUBLIC_URL + `./lang/${lang[1] || "GB"}.png`} />
+                        <img alt="" src={process.env.PUBLIC_URL + `./lang/${lang[1] || "GB"}.png`} />
                         <ul className="other">
                             {LangItems.map((item, index) => {
                                 if(lang[1])
-                                    return lang[1] != item ? <li key={index} onClick={() => props.lang[0](item)}><img src={process.env.PUBLIC_URL + `./lang/${item}.png`} /></li> : null
+                                    return lang[1] != item ? <li key={index} onClick={() => props.lang[0](item)}><img alt="" src={process.env.PUBLIC_URL + `./lang/${item}.png`} /></li> : null
                                 else
-                                    return "GB" != item ? <li key={index} onClick={() => props.lang[0](item)}><img src={process.env.PUBLIC_URL + `./lang/${item}.png`} /></li> : null
+                                    return "GB" != item ? <li key={index} onClick={() => props.lang[0](item)}><img alt="" src={process.env.PUBLIC_URL + `./lang/${item}.png`} /></li> : null
                             })}
                         </ul>
                     </span>

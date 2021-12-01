@@ -11,7 +11,7 @@ const Skills: FunctionComponent = () => {
                     <div className="content">
                         {value.content.map((v, i) => {
                             return <span key={i}>
-                                <img src={v.img} />
+                                <img alt="" src={v.img} />
                                 <p>{v.title}</p>
                             </span>
                         })}
