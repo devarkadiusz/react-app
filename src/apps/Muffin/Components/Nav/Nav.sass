@@ -4,11 +4,8 @@ nav.Nav
     height: 100px
     display: flex
     position: sticky
-    background-color: rgb(255, 255, 255)
-    transition: .6s all
+    transition: .15s all
     z-index: 99
-    &.active
-        box-shadow: 0 0 12px 0 #0000000f
     .width
         max-width: 1350px
         width: 100%
@@ -18,6 +15,31 @@ nav.Nav
         align-items: center
         justify-content: space-between
     .logo
+        display: flex
+        align-items: center
+        justify-content: center
+        span.name
+            color: rgba(red, .8)
+            width: 55px
+            margin: 0 50px 0 30px
+            display: flex
+            font-weight: bolder
+            font-size: 20px
+            align-items: center
+            transition: .4s all
+            cursor: default
+
+        .previewMuffin
+            margin: 0 10px 0 30px
+            width: 60px
+            display: flex
+            position: relative
+            align-items: center
+            justify-content: center
+            transition: .4s all
+            cursor: pointer
+            img
+                position: absolute
         img
             margin: 0 30px
             max-width: 60px
@@ -35,7 +57,7 @@ nav.Nav
             display: flex
             padding: 10px 20px
             font-size: 15px
-            justify-items: center
+            justify-content: center
             font-weight: bold
             border-radius: 6px
             transition: .2s all
@@ -51,21 +73,21 @@ nav.Nav
                 width: 136px
 
         li:nth-child(2)
-            width: 97px
+            width: 101px
             &:hover ~ span
-                margin: 0 0 0 136px
+                margin: 0 0 0 140px
                 width: 137px
 
         li:nth-child(3)
             width: 61px
             &:hover ~ span
-                margin: 0 0 0 273px
+                margin: 0 0 0 277px
                 width: 101px
 
         li:nth-child(4)
             width: 68px
             &:hover ~ span
-                margin: 0 0 0 374px
+                margin: 0 0 0 378px
                 width: 108px
 
         > span
@@ -80,6 +102,7 @@ nav.Nav
     .right_menu
         display: flex
         align-items: center
+        z-index: 2
     .shoppingCart
         height: 100px
         display: flex
@@ -96,7 +119,7 @@ nav.Nav
         margin: 0
         padding: 0
         position: absolute
-        transform: translateX(-200px)
+        transform: translateX(0px)
         transition: .4s all
         animation: .4s showed
         ul
@@ -127,13 +150,15 @@ nav.Nav
                     margin-bottom: 65px
                 span
                     display: flex
-                    margin: 0 0 0 20px
                     position: relative
                     align-items: center
+                .remove
+                    margin: 0 0 0 20px
                 img
                     max-width: 50px
                     position: absolute
                 .previewMuffin
+                    margin: 0 20px
                     display: flex
                     align-items: center
                     justify-content: center
@@ -144,14 +169,52 @@ nav.Nav
             display: none
 
     .language
-        width: 40px
-        height: 20px
+        max-width: 90px
         margin: 0 20px
         padding: 0
         display: block
+        position: relative
         cursor: pointer
-        img
-            max-width: 40px
+        > img
+            max-width: 60px
+            padding: 15px
+        &:hover ul
+            display: flex
+            opacity: 1
+        ul
+            padding: 10px 0 0 0
+            width: 90px
+            position: absolute
+            display: none
+            flex-wrap: wrap
+            align-items: center
+            border-radius: 12px
+            justify-content: center
+            list-style-type: none
+            background-color: white
+            box-shadow: 0 11px 12px 0 #0000000f
+            transition: .4s all
+            opacity: 0
+            li
+                margin: 0
+                padding: 15px 10px
+                display: flex
+                box-sizing: border-box
+                align-items: center
+                justify-content: center
+                img
+                    max-width: 60px
+                &:first-child
+                    padding: 15px 15px 10px 15px
+    &.active
+        box-shadow: 0 0 12px 0 #0000000f
+        .logo .previewMuffin
+            margin-right: 30px
+        span.name
+            width: 0
+            margin: 0
+            overflow: hidden
+            opacity: 0
 @keyframes showed
     0%
         transform: translateY(-30px)
@@ -160,7 +223,11 @@ nav.Nav
         transform: translateY(0)
         opacity: 1
 
-@media only screen and (max-width: 800px)
+@media only screen and (max-width: 1700px)
+    .shoppingCartList
+        right: 30px
+
+@media only screen and (max-width: 1300px)
     nav.Nav
         align-items: start
         .hamburger
@@ -173,6 +240,7 @@ nav.Nav
             align-items: center
             justify-content: center
             cursor: pointer
+            z-index: 2
             &>span
                 width: 70%
                 height: 4px
@@ -193,11 +261,15 @@ nav.Nav
                         transform: rotate(-45deg)
                     &:nth-last-child(2)
                         transform: rotate(45deg)
-                        
+
         .width
             height: 100%
             justify-content: space-between
         .left_menu
+            width: 100%
+            position: absolute
+            .logo
+                margin-left: 50px
             ul
                 top: 100px
                 left: 0
