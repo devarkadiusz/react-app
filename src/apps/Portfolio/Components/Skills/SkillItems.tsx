@@ -65,7 +65,7 @@ export const WebDev = [
         img: HTML5,
     },
     {
-        title: "CSS / SCSS / SASS",
+        title: "CSS 3 / SCSS / SASS",
         progress: 60,
         img: Sass,
     },
