@@ -13,6 +13,8 @@ nav.Nav
         justify-content: space-between
     .Logo
         cursor: pointer
+        &:hover span:first-child
+            background-color: rgb(110, 0, 255)
         span
             &:first-child
                 color: white
@@ -22,7 +24,8 @@ nav.Nav
                 font-family: 'Anton', sans-serif
                 border-radius: 10px
                 letter-spacing: 2px
-                background-color: black
+                background-color: rgb(0, 0, 0)
+                transition: .5s all
             &:last-child
                 font-size: 22px
                 font-family: 'Open Sans', sans-serif
