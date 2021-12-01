@@ -8,7 +8,8 @@ const Header: FunctionComponent = () => {
             <h1>Arkadiusz Szatkowski</h1>
             <ul>
                 <li>Programmer</li>
-                <li>Web Developer</li>
+                <li>FrontEnd Developer</li>
+                <li>BackEnd Developer</li>
                 <li>UI/UX Designer</li>
                 <li>System Administrator </li>
             </ul>
