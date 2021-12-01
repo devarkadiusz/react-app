@@ -1,0 +1,46 @@
+nav.Nav
+    top: 0
+    width: 100%
+    position: sticky
+    transition: .5s all
+    background: rgba(255, 255, 255, 0.8)
+    backdrop-filter: saturate(180%) blur(20px)
+    z-index: 9
+    // &.active
+    //     box-shadow: rgba(201, 204, 207, .2) 0px 7px 24px
+    .max-website-width
+        align-items: center
+        justify-content: space-between
+    .Logo
+        cursor: pointer
+        span
+            &:first-child
+                color: white
+                margin: 0 10px
+                font-size: 18px
+                padding: 5px 10px
+                font-family: 'Anton', sans-serif
+                border-radius: 10px
+                letter-spacing: 2px
+                background-color: black
+            &:last-child
+                font-size: 22px
+                font-family: 'Open Sans', sans-serif
+    .Navigation
+        ul
+            margin: 0
+            display: flex
+            padding: 0
+            list-style-type: none
+            li
+                color: rgba(0, 0, 0, .70)
+                margin: 12px
+                padding: 10px 20px
+                font-size: 14px
+                font-family: 'Poppins', sans-serif
+                font-weight: 600
+                border-radius: 12px
+                transition: .6s all
+                cursor: pointer
+                &:hover
+                    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px
